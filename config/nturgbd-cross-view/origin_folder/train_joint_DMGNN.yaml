@@ -1,0 +1,47 @@
+work_dir: ./work_dir/ntu/xview/agcn_joint_DMGNN_fusion@2
+model_saved_name: ./runs/ntu_cv_agcn_joint
+# feeder
+feeder: feeders.feeder.Feeder
+train_feeder_args:
+  data_path: /home/std/zhuyiran/Projects/ST-GCN/data/NTU-RGB-D/xview/train_data.npy
+  label_path: /home/std/zhuyiran/Projects/ST-GCN/data/NTU-RGB-D/xview/train_label.pkl
+  debug: False
+  random_choose: False
+  random_shift: False
+  random_move: False
+  window_size: -1
+  normalization: False
+
+test_feeder_args:
+  data_path: /home/std/zhuyiran/Projects/ST-GCN/data/NTU-RGB-D/xview/val_data.npy
+  label_path: /home/std/zhuyiran/Projects/ST-GCN/data/NTU-RGB-D/xview/val_label.pkl
+
+# model
+model: DMGNN.model.Model
+model_args:
+  n_in_enc: 3
+  n_hid_enc: 256
+  fusion_layer: 2
+  cross_w: 0.3
+  graph_args_j:
+    layout: 'ntu_rgbd'
+    strategy: 'spatial'
+  graph_args_p:
+    layout: 'ntu_rgbd'
+    strategy: 'spatial'
+  graph_args_b:
+    layout: 'ntu_rgbd'
+    strategy: 'spatial'
+# edge_weighting: True
+
+#optim
+weight_decay: 0.0001
+base_lr: 0.1
+step: [30, 40]
+
+# training
+device: [0]
+batch_size: 9
+test_batch_size: 9
+num_epoch: 55
+nesterov: True
