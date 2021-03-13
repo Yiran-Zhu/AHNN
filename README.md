@@ -1,5 +1,5 @@
-# S2HNN
-Selective-scale Hypergraph Neural Network.
+# AHNN
+Adaptive Hypergraph Neural Network.
 
 # Dependencies
 - Python 3.6
